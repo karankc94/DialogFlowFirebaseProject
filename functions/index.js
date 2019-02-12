@@ -26,7 +26,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   const agent = new WebhookClient({ request, response });
  // console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
  // console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
- // commonHandler(agent);
+  // commonHandler(agent);
   function welcome(agent) {
     agent.add(`Welcome to my agent!`);
   }
@@ -56,7 +56,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     )
 
     for (let key in reqEntities) {
-      if (reqEntities[key].constructor === String) {
+      if (reqEntities[key].constructor === String && reqEntities[key]) {
         extractedEntities.push(reqEntities[key].toUpperCase());
       }
       else if (reqEntities[key].constructor === Array) {
@@ -104,32 +104,32 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   // }
 
   // Run the proper function handler based on the matched Dialogflow intent name
-  let intentMap = new Map();
-  intentMap.set('Default Welcome Intent', welcome);
-  intentMap.set('Default Fallback Intent', fallback);
+  // let intentMap = new Map();
+  // intentMap.set('Default Welcome Intent', welcome);
+  // intentMap.set('Default Fallback Intent', fallback);
 
-  intentMap.set('EnginePowerInfo', commonHandler);
-  intentMap.set('EngineDetailsInfo', commonHandler);
-  intentMap.set('ConfigurationInfo', commonHandler);
-  intentMap.set('PartCapacityInfo', commonHandler);
-  intentMap.set('StyleInfo',commonHandler);
-  intentMap.set('BreakInfo',commonHandler);
-  intentMap.set('CabinInfo',commonHandler);
-  intentMap.set('ProductivityInfo',commonHandler);
-  intentMap.set('TearoutForceInfo',commonHandler);
+  // intentMap.set('EnginePowerInfo', commonHandler);
+  // intentMap.set('EngineDetailsInfo', commonHandler);
+  // intentMap.set('ConfigurationInfo', commonHandler);
+  // intentMap.set('PartCapacityInfo', commonHandler);
+  // intentMap.set('StyleInfo',commonHandler);
+  // intentMap.set('BreakInfo',commonHandler);
+  // intentMap.set('CabinInfo',commonHandler);
+  // intentMap.set('ProductivityInfo',commonHandler);
+  // intentMap.set('TearoutForceInfo',commonHandler);
 
-  intentMap.set('EnginePower', commonHandler);
-  intentMap.set('EngineDetails', commonHandler);
-  intentMap.set('FunctionOfVariousParts', commonHandler);
-  intentMap.set('Model/PartsDescription', commonHandler);
-  intentMap.set('ModelAttachments', commonHandler);
-  intentMap.set('StructutralDurability', commonHandler);
-  intentMap.set('AdvantageOfModels/Parts/Features', commonHandler);
+  // intentMap.set('EnginePower', commonHandler);
+  // intentMap.set('EngineDetails', commonHandler);
+  // intentMap.set('FunctionOfVariousParts', commonHandler);
+  // intentMap.set('Model/PartsDescription', commonHandler);
+  // intentMap.set('ModelAttachments', commonHandler);
+  // intentMap.set('StructutralDurability', commonHandler);
+  // intentMap.set('AdvantageOfModels/Parts/Features', commonHandler);
 
-  
+
   
   // intentMap.set('<INTENT_NAME_HERE>', yourFunctionHandler);
   // intentMap.set('<INTENT_NAME_HERE>', googleAssistantHandler);
-  agent.handleRequest(intentMap);
+  agent.handleRequest(commonHandler);
 });
 
