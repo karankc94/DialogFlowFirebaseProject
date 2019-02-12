@@ -65,7 +65,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       }
     };
     extractedEntities.sort();
-    console.log('payload:- '+payload);
+    console.log('payload:- '+JSON.stringify(payload));
     console.log('Enitity:- '+extractedEntities);
     let result = payload.filter(z => { return (JSON.stringify(z.entity) == JSON.stringify(extractedEntities)); });
     if (result && result.length > 0) {
