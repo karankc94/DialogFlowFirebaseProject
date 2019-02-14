@@ -49,7 +49,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     })
     payload.forEach((e) => {
       for (let i = 0; i < e.entity.length; i++) {
-        e.entity[i] = e.entity[i].toUpperCase();
+        e.entity[i] = e.entity[i].constructor === String ? e.entity[i].toUpperCase() : e.entity[i];
       }
       e.entity.sort();
     }
@@ -61,8 +61,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       }
       else if (reqEntities[key].constructor === Array) {
         reqEntities[key].forEach(
-          (e) => { extractedEntities.push(e.toUpperCase()); });
-      }
+          (e) => {  extractedEntities.push(e.toUpperCase()); });
+      }else{
+		extractedEntities.push(reqEntities[key]);
+	  }
     };
     extractedEntities.sort();
     console.log('payload:- '+JSON.stringify(payload));
