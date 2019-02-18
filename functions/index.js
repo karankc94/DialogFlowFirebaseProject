@@ -16,7 +16,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
    */
   function commonHandler(agent) {
     console.log(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-    console.log(":::::::::: " + new Date().toLocaleDateString + " ::::::::::");
+    console.log(":::::::::: " + new Date() + " ::::::::::");
     console.log(":::::::::: DialogFlow FulFillment Called ::::::::::");
     console.log("::::::::::::::::::::::::::::::::::::::::");
     console.log(JSON.stringify(request.body));
