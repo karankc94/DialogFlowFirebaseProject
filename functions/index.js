@@ -15,6 +15,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
    * Function To handle DialogFlow FulFillment
    */
   function commonHandler(agent) {
+    console.log(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+    console.log(":::::::::: " + new Date().toLocaleDateString + " ::::::::::");
     console.log(":::::::::: DialogFlow FulFillment Called ::::::::::");
     console.log("::::::::::::::::::::::::::::::::::::::::");
     console.log(JSON.stringify(request.body));
@@ -79,6 +81,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       }
     }
     console.log(":::::::::: DialogFlow FulFillment End ::::::::::");
+    console.log(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
   }
 });
 
