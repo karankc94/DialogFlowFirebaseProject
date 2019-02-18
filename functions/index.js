@@ -51,17 +51,21 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       )
 
       for (let key in reqEntities) {
-        if (reqEntities[key].constructor === String && reqEntities[key]) {
-          extractedEntities.push(reqEntities[key].toUpperCase());
-        }
-        else if (reqEntities[key].constructor === Array) {
-          reqEntities[key].forEach(
-            (e) => { extractedEntities.push(e.toUpperCase()); });
-        } else {
-          extractedEntities.push(reqEntities[key]);
+        if (reqEntities[key]) {
+          if (reqEntities[key].constructor === String) {
+            extractedEntities.push(reqEntities[key].toUpperCase());
+          }
+          else if (reqEntities[key].constructor === Array) {
+            reqEntities[key].forEach(
+              (e) => { extractedEntities.push(e.toUpperCase()); });
+          } else {
+            extractedEntities.push(reqEntities[key]);
+          }
         }
       };
       extractedEntities.sort();
+      console.log(":::::::::: Extracted Entities ::::::::::");
+      console.log(JSON.stringify(extractedEntities))
       let result = payload.filter(z => { return (JSON.stringify(z.entity) == JSON.stringify(extractedEntities)); });
       if (result && result.length > 0) {
         console.log(":::::::::: Answer Found in payload ::::::::::");
